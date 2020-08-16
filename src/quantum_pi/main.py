@@ -90,6 +90,17 @@ def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
     return job.result().get_counts(circ_)
 
 
+## Load your IBMQ account if
+## you'd like to use the cloud simulator or real quantum devices
+
+IBMQ.save_account("your api", overwrite=True)
+IBMQ.load_account()
+my_provider = IBMQ.get_provider()
+simulator_cloud = my_provider.get_backend('ibmq_qasm_simulator')
+simulator = Aer.get_backend('qasm_simulator')
+device = my_provider.get_backend('ibmq_16_melbourne')
+
+
 ## Function to estimate pi
 ## Summary: using the notation in the Qiskit textbook (qiskit.org/textbook),
 ## do quantum phase estimation with the operator U = u1(theta) and |psi> = |1>
