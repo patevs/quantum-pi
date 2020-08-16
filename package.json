@@ -1,12 +1,12 @@
 {
-  "name": "python-template",
-  "version": "1.1.0",
-  "description": "Template repository for Python projects",
+  "name": "quantum-pi",
+  "version": "0.0.0",
+  "description": "Estimating Pi Using Quantum Phase Estimation Algorithm",
   "author": "PatEvs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patevs/python-template.git"
+    "url": "git+https://github.com/patevs/quantum-pi.git"
   },
   "engines": {
     "node": ">=10.21.0",
