@@ -1,11 +1,16 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
+# * -------------------------- * #
+# * src/quantum_pi/skeleton.py * #
+# * -------------------------- * #
+
 """
 This is a skeleton file that can serve as a starting point for a Python
 console script. To run this script uncomment the following lines in the
 [options.entry_points] section in setup.cfg:
 
     console_scripts =
-        fibonacci = python_template.skeleton:run
+        fibonacci = quantum_pi.skeleton:run
 
 Then run `python setup.py install` which will install the command `fibonacci`
 inside your current environment.
