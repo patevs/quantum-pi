@@ -1,4 +1,9 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
+# * -------------------------- * #
+# * src/quantum_pi/__init__.py * #
+# * -------------------------- * #
+
 from pkg_resources import get_distribution, DistributionNotFound
 
 try:
@@ -9,3 +14,5 @@ except DistributionNotFound:
     __version__ = '0.0.0'
 finally:
     del get_distribution, DistributionNotFound
+
+# EOF #
