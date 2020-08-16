@@ -33,6 +33,9 @@ import numpy as np
 import matplotlib.pyplot as plotter
 from qiskit.tools.monitor import job_monitor
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Visualisation settings
 import seaborn as sns, operator
 sns.set_style("dark")
