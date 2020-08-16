@@ -54,6 +54,41 @@ _logger = logging.getLogger(__name__)
 # * FUNCTIONS * #
 # * --------- * #
 
+## Code for inverse Quantum Fourier Transform
+## adapted from Qiskit Textbook at
+## qiskit.org/textbook
+def qft_dagger(circ_, n_qubits):
+    """n-qubit QFTdagger the first n qubits in circ"""
+    for qubit in range(int(n_qubits/2)):
+        circ_.swap(qubit, n_qubits-qubit-1)
+    for j in range(0,n_qubits):
+        for m in range(j):
+            circ_.cu1(-np.pi/float(2**(j-m)), m, j)
+        circ_.h(j)
+
+
+## Code for initial state of Quantum Phase Estimation
+## adapted from Qiskit Textbook at qiskit.org/textbook
+## Note that the starting state is created by applying
+## H on the first n_qubits, and setting the last qubit to |psi> = |1>
+
+def qpe_pre(circ_, n_qubits):
+    circ_.h(range(n_qubits))
+    circ_.x(n_qubits)
+
+    for x in reversed(range(n_qubits)):
+        for _ in range(2**(n_qubits-1-x)):
+            circ_.cu1(1, n_qubits-1-x, n_qubits)
+
+
+## Run a Qiskit job on either hardware or simulators
+
+def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
+    job = execute(circ_, backend=backend_, shots=shots_, optimization_level=optimization_level_)
+    job_monitor(job)
+    return job.result().get_counts(circ_)
+
+
 def parse_args(args):
     """Parse command line parameters
 
