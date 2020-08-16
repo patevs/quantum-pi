@@ -33,6 +33,7 @@ import numpy as np
 import matplotlib.pyplot as plotter
 from qiskit.tools.monitor import job_monitor
 
+import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -52,6 +53,8 @@ __license__ = "MIT"
 _logger = logging.getLogger(__name__)
 
 pi = np.pi
+
+IBM_QUANTUM_KEY = os.getenv("IBM_QUANTUM_KEY")
 
 
 # * --------- * #
@@ -96,8 +99,7 @@ def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
 ## Load your IBMQ account if
 ## you'd like to use the cloud simulator or real quantum devices
 
-# TODO: Load API_KEY from environment variable
-IBMQ.save_account("API_KEY", overwrite=True)
+IBMQ.save_account(IBM_QUANTUM_KEY, overwrite=True)
 IBMQ.load_account()
 my_provider = IBMQ.get_provider()
 simulator_cloud = my_provider.get_backend('ibmq_qasm_simulator')
