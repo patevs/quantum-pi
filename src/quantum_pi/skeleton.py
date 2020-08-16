@@ -24,7 +24,7 @@ import argparse
 import sys
 import logging
 
-from python_template import __version__
+from quantum_pi import __version__
 
 __author__ = "Patrick Evans"
 __copyright__ = "Patrick Evans"
