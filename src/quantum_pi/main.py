@@ -94,7 +94,7 @@ def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
 ## you'd like to use the cloud simulator or real quantum devices
 
 # TODO: Load API_KEY from environment variable
-IBMQ.save_account("your api", overwrite=True)
+IBMQ.save_account("API_KEY", overwrite=True)
 IBMQ.load_account()
 my_provider = IBMQ.get_provider()
 simulator_cloud = my_provider.get_backend('ibmq_qasm_simulator')
@@ -140,6 +140,20 @@ def get_pi_estimate(n_qubits):
     return (1./(2*theta))
 
 
+def plot_results(nqs, pi_estimates):
+	# Plot the results
+	plotter.plot(nqs, [pi]*len(nqs), '--r')
+	plotter.plot(nqs, pi_estimates, '.-', markersize=12)
+	plotter.xlim([1.5, 12.5])
+	plotter.ylim([1.5, 4.5])
+	plotter.legend(['$\pi$', 'estimate of $\pi$'])
+	plotter.xlabel('Number of qubits', fontdict={'size':20})
+	plotter.ylabel('$\pi$ and estimate of $\pi$', fontdict={'size':20})
+	plotter.tick_params(axis='x', labelsize=12)
+	plotter.tick_params(axis='y', labelsize=12)
+	plotter.show()
+
+
 def parse_args(args):
     """Parse command line parameters
 
@@ -155,25 +169,6 @@ def parse_args(args):
         "--version",
         action="version",
         version="quantum-pi {ver}".format(ver=__version__))
-    parser.add_argument(
-        dest="n",
-        help="n-th Fibonacci number",
-        type=int,
-        metavar="INT")
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        dest="loglevel",
-        help="set loglevel to INFO",
-        action="store_const",
-        const=logging.INFO)
-    parser.add_argument(
-        "-vv",
-        "--very-verbose",
-        dest="loglevel",
-        help="set loglevel to DEBUG",
-        action="store_const",
-        const=logging.DEBUG)
     return parser.parse_args(args)
 
 
@@ -212,17 +207,7 @@ def run():
         thisnq_pi_estimate = get_pi_estimate(nq)
         pi_estimates.append(thisnq_pi_estimate)
         print(f"{nq} qubits, pi ≈ {thisnq_pi_estimate}")
-	# Plot the results
-	plotter.plot(nqs, [pi]*len(nqs), '--r')
-	plotter.plot(nqs, pi_estimates, '.-', markersize=12)
-	plotter.xlim([1.5, 12.5])
-	plotter.ylim([1.5, 4.5])
-	plotter.legend(['$\pi$', 'estimate of $\pi$'])
-	plotter.xlabel('Number of qubits', fontdict={'size':20})
-	plotter.ylabel('$\pi$ and estimate of $\pi$', fontdict={'size':20})
-	plotter.tick_params(axis='x', labelsize=12)
-	plotter.tick_params(axis='y', labelsize=12)
-	plotter.show()
+    plot_results(nqs, pi_estimates)
 
 
 if __name__ == "__main__":
