@@ -112,8 +112,8 @@ def get_pi_estimate(n_qubits):
     # measure all but the last qubits
     circ.measure(range(n_qubits), range(n_qubits))
 
-    if n_qubits < 10:
-        circ.draw(output='mpl').savefig('piday-code-output/'+str(n_qubits)+'_qubit_circuit.png')
+    # if n_qubits < 10:
+    #     circ.draw(output='mpl').savefig('piday-code-output/'+str(n_qubits)+'_qubit_circuit.png')
 
     # run the job and get the results
     counts = run_job(circ, backend_=simulator, shots_=10000, optimization_level_=0)
