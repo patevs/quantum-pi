@@ -93,6 +93,7 @@ def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
 ## Load your IBMQ account if
 ## you'd like to use the cloud simulator or real quantum devices
 
+# TODO: Load API_KEY from environment variable
 IBMQ.save_account("your api", overwrite=True)
 IBMQ.load_account()
 my_provider = IBMQ.get_provider()
@@ -211,6 +212,17 @@ def run():
         thisnq_pi_estimate = get_pi_estimate(nq)
         pi_estimates.append(thisnq_pi_estimate)
         print(f"{nq} qubits, pi ≈ {thisnq_pi_estimate}")
+	# Plot the results
+	plotter.plot(nqs, [pi]*len(nqs), '--r')
+	plotter.plot(nqs, pi_estimates, '.-', markersize=12)
+	plotter.xlim([1.5, 12.5])
+	plotter.ylim([1.5, 4.5])
+	plotter.legend(['$\pi$', 'estimate of $\pi$'])
+	plotter.xlabel('Number of qubits', fontdict={'size':20})
+	plotter.ylabel('$\pi$ and estimate of $\pi$', fontdict={'size':20})
+	plotter.tick_params(axis='x', labelsize=12)
+	plotter.tick_params(axis='y', labelsize=12)
+	plotter.show()
 
 
 if __name__ == "__main__":
