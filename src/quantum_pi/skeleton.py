@@ -20,11 +20,30 @@ also be used as template for Python modules.
 Note: This skeleton file can be safely removed if not needed!
 """
 
+# * ------- * #
+# * IMPORTS * #
+# * ------- * #
+
 import argparse
 import sys
 import logging
 
 from quantum_pi import __version__
+
+# from IPython.display import clear_output
+# from  qiskit import *
+# from qiskit.visualization import plot_histogram
+# import numpy as np
+# import matplotlib.pyplot as plotter
+# from qiskit.tools.monitor import job_monitor
+# Visualisation settings
+# import seaborn as sns, operator
+# sns.set_style("dark")
+
+
+# * --------- * #
+# * CONSTANTS * #
+# * --------- * #
 
 __author__ = "Patrick Evans"
 __copyright__ = "Patrick Evans"
@@ -32,6 +51,12 @@ __license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
+# pi = np.pi
+
+
+# * --------- * #
+# * FUNCTIONS * #
+# * --------- * #
 
 def fib(n):
     """Fibonacci example function
