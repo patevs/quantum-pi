@@ -5,7 +5,7 @@ console script. To run this script uncomment the following lines in the
 [options.entry_points] section in setup.cfg:
 
     console_scripts =
-         fibonacci = python_template.skeleton:run
+        fibonacci = python_template.skeleton:run
 
 Then run `python setup.py install` which will install the command `fibonacci`
 inside your current environment.
@@ -32,10 +32,10 @@ def fib(n):
     """Fibonacci example function
 
     Args:
-      n (int): integer
+    	n (int): integer
 
     Returns:
-      int: n-th Fibonacci number
+    	int: n-th Fibonacci number
     """
     assert n > 0
     a, b = 1, 1
@@ -48,17 +48,17 @@ def parse_args(args):
     """Parse command line parameters
 
     Args:
-      args ([str]): command line parameters as list of strings
+    	args ([str]): command line parameters as list of strings
 
     Returns:
-      :obj:`argparse.Namespace`: command line parameters namespace
+    	:obj:`argparse.Namespace`: command line parameters namespace
     """
     parser = argparse.ArgumentParser(
         description="Just a Fibonacci demonstration")
     parser.add_argument(
         "--version",
         action="version",
-        version="python-template {ver}".format(ver=__version__))
+        version="puantum-pi {ver}".format(ver=__version__))
     parser.add_argument(
         dest="n",
         help="n-th Fibonacci number",
@@ -85,7 +85,7 @@ def setup_logging(loglevel):
     """Setup basic logging
 
     Args:
-      loglevel (int): minimum loglevel for emitting messages
+    	loglevel (int): minimum loglevel for emitting messages
     """
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
     logging.basicConfig(level=loglevel, stream=sys.stdout,
@@ -96,7 +96,7 @@ def main(args):
     """Main entry point allowing external calls
 
     Args:
-      args ([str]): command line parameter list
+    	args ([str]): command line parameter list
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
