@@ -26,15 +26,16 @@ import logging
 
 from quantum_pi import __version__
 
-# from IPython.display import clear_output
-# from  qiskit import *
-# from qiskit.visualization import plot_histogram
-# import numpy as np
-# import matplotlib.pyplot as plotter
-# from qiskit.tools.monitor import job_monitor
+from IPython.display import clear_output
+from qiskit import *
+from qiskit.visualization import plot_histogram
+import numpy as np
+import matplotlib.pyplot as plotter
+from qiskit.tools.monitor import job_monitor
+
 # Visualisation settings
-# import seaborn as sns, operator
-# sns.set_style("dark")
+import seaborn as sns, operator
+sns.set_style("dark")
 
 
 # * --------- * #
@@ -47,7 +48,7 @@ __license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
-# pi = np.pi
+pi = np.pi
 
 
 # * --------- * #
@@ -89,6 +90,44 @@ def run_job(circ_, backend_, shots_=1000, optimization_level_=0):
     return job.result().get_counts(circ_)
 
 
+## Function to estimate pi
+## Summary: using the notation in the Qiskit textbook (qiskit.org/textbook),
+## do quantum phase estimation with the operator U = u1(theta) and |psi> = |1>
+## such that u1(theta)|1> = exp(2 x pi x i x theta)|1>
+## By setting theta = 1 radian, we can solve for pi
+## using 2^n x 1 radian = most frequently measured count = 2 x pi
+
+def get_pi_estimate(n_qubits):
+
+    # create the circuit
+    circ = QuantumCircuit(n_qubits + 1, n_qubits)
+    # create the input state
+    qpe_pre(circ, n_qubits)
+    # apply a barrier
+    circ.barrier()
+    # apply the inverse fourier transform
+    qft_dagger(circ, n_qubits)
+    # apply  a barrier
+    circ.barrier()
+    # measure all but the last qubits
+    circ.measure(range(n_qubits), range(n_qubits))
+
+    if n_qubits < 10:
+        circ.draw(output='mpl').savefig('piday-code-output/'+str(n_qubits)+'_qubit_circuit.png')
+
+    # run the job and get the results
+    counts = run_job(circ, backend_=simulator, shots_=10000, optimization_level_=0)
+    # print(counts)
+
+    # get the count that occurred most frequently
+    max_counts_result = max(counts, key=counts.get)
+    max_counts_result = int(max_counts_result, 2)
+
+    # solve for pi from the measured counts
+    theta = max_counts_result/2**n_qubits
+    return (1./(2*theta))
+
+
 def parse_args(args):
     """Parse command line parameters
 
@@ -99,11 +138,11 @@ def parse_args(args):
     	:obj:`argparse.Namespace`: command line parameters namespace
     """
     parser = argparse.ArgumentParser(
-        description="Just a Fibonacci demonstration")
+        description="Estimating Pi Using Quantum Phase Estimation Algorithm")
     parser.add_argument(
         "--version",
         action="version",
-        version="puantum-pi {ver}".format(ver=__version__))
+        version="quantum-pi {ver}".format(ver=__version__))
     parser.add_argument(
         dest="n",
         help="n-th Fibonacci number",
@@ -153,7 +192,14 @@ def main(args):
 def run():
     """Entry point for console_scripts
     """
-    main(sys.argv[1:])
+    # main(sys.argv[1:])
+    # estimate pi using different numbers of qubits
+    nqs = list(range(2,12+1))
+    pi_estimates = []
+    for nq in nqs:
+        thisnq_pi_estimate = get_pi_estimate(nq)
+        pi_estimates.append(thisnq_pi_estimate)
+        print(f"{nq} qubits, pi ≈ {thisnq_pi_estimate}")
 
 
 if __name__ == "__main__":
