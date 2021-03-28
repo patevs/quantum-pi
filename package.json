@@ -13,10 +13,10 @@
     "npm": ">=6.8.0"
   },
   "scripts": {
-    "release": "np",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "updates": "npx ncu",
+    "release": "np"
   },
-  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "commitlint-config-gitmoji": "^2.2.3",
