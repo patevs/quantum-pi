@@ -13,6 +13,7 @@
     "npm": ">=6.8.0"
   },
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 0",
     "updates": "npx ncu",
     "release": "np"
