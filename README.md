@@ -17,6 +17,7 @@
 
 ```md
 .
+├── .husky                # Husky configuration
 ├── .commitlintrc.json    # Commitlint configuration
 ├── .editorconfig         # Editor configuration
 ├── .gitignore            # Git ignore rules
