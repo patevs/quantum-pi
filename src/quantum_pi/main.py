@@ -105,6 +105,7 @@ my_provider = IBMQ.get_provider()
 simulator_cloud = my_provider.get_backend('ibmq_qasm_simulator')
 simulator = Aer.get_backend('qasm_simulator')
 device = my_provider.get_backend('ibmq_16_melbourne')
+# device = my_provider.get_backend('ibm_auckland')
 
 
 ## Function to estimate pi
