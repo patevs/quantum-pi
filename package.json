@@ -1,6 +1,6 @@
 {
   "name": "quantum-pi",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Estimating Pi Using Quantum Phase Estimation Algorithm",
   "author": "PatEvs",
   "license": "MIT",
