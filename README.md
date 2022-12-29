@@ -20,10 +20,9 @@
 ```md
 .
 ├── .husky                # Husky configuration
-├── .commitlintrc.json    # Commitlint configuration
+├── .commitlintrc         # Commitlint configuration
 ├── .editorconfig         # Editor configuration
 ├── .gitignore            # Git ignore rules
-├── .huskyrc              # Husky configuration
 ├── .np-config.json       # NPM publish (np) configuration
 ├── LICENSE               # Project license
 ├── package.json          # NPM package configuration
