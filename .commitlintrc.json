@@ -1,7 +1,8 @@
 {
   "extends": ["gitmoji"],
   "rules": {
-    "subject-empty": [0, "never"],
+    "header-max-length": [0, "always", 80],
+    "subject-empty" : [0, "never"],
     "type-empty": [0, "never"]
   }
 }
