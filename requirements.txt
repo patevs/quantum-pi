@@ -15,7 +15,7 @@
 # numpy==1.13.3
 # scipy==1.0
 #
-ipython==7.31.1
+ipython==8.10.0
 qiskit==0.20.0
 numpy==1.22.0
 matplotlib==3.3.1
